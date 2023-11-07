@@ -33,32 +33,9 @@ collective.indexvocabularies
 
 A Plone addon for creating dynamic vocabularies from catalog indexes.
 
-Features
---------
+This package creates dynamic vocabularies based on any index in plone.
 
-- Can be bullet points
-
-
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
-
-Translations
-------------
-
-This product has been translated into
-
-- Klingon (thanks, K'Plai)
-
+Typical use case for this is to provide a 'tags' type field.
 
 Installation
 ------------
@@ -75,19 +52,66 @@ Install collective.indexvocabularies by adding it to your buildout::
 
 and then running ``bin/buildout``
 
+Activation
+----------
+
+Activate the add-on by installing it in the Addons Control panel.
+
+Configure
+---------
+
+To create a vocabulary from an index, go to the 'Index Vocabularies' control
+panel and select the indexes you wish to create vocabularies for.
+
+To use the vocabulary in a tag field, you will need to edit the XML Schema of
+your content type. Currently this is only possible via the Classic UI
+(Control Panel -> Content Types -> Schema -> Edit XML Schema)
+
+A basic schema (without tag fields):
+
+```
+<model xmlns="http://namespaces.plone.org/supermodel/schema">
+  <schema>
+    <field name="test" type="zope.schema.Set">
+      <title>test</title>
+      <value_type type="zope.schema.TextLine" />
+    </field>
+  </schema>
+</model>
+```
+
+In order to make the field a 'tag' field, you will add the following widget
+directive:
+
+```
+    <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+        <vocabulary>collective.indexvocabularies.category</vocabulary>
+    </form:widget>
+```
+
+The combined schema code would look like this:
+
+```
+<model xmlns="http://namespaces.plone.org/supermodel/schema">
+  <schema>
+    <field name="test" type="zope.schema.Set">
+      <title>test</title>
+      <value_type type="zope.schema.TextLine" />
+      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+          <vocabulary>collective.indexvocabularies.category</vocabulary>
+      </form:widget>
+    </field>
+  </schema>
+</model>
+```
+
+You should now have a tags field configured on your content type.
+
 
 Authors
 -------
 
-Provided by awesome people ;)
-
-
-Contributors
-------------
-
-Put your name here, you deserve it!
-
-- ?
+Jon Pentland, PretaGov Ltd - [instification]
 
 
 Contribute
@@ -95,14 +119,12 @@ Contribute
 
 - Issue Tracker: https://github.com/collective/collective.indexvocabularies/issues
 - Source Code: https://github.com/collective/collective.indexvocabularies
-- Documentation: https://docs.plone.org/foo/bar
 
 
 Support
 -------
 
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+If you are having issues, please create an issue in the GitHub repo.
 
 
 License
