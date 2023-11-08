@@ -107,6 +107,11 @@ The combined schema code would look like this:
 
 You should now have a tags field configured on your content type.
 
+Note that the tag field should be configured to use the same index that is
+being read from. For example, you could create an index called 'categories',
+which is mapped to the `Object.categories` field, then enable it in the
+index vocabularies control panel. Once you have updated the schema to use the
+new vocabulary you will have tags field that you can add values to.
 
 Authors
 -------
