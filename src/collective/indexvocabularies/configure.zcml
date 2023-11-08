@@ -21,7 +21,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="Index Vocabularies: Install"
+      title="Index Vocabularies"
       directory="profiles/default"
       description="Adds support for index based vocabularies."
       provides="Products.GenericSetup.interfaces.EXTENSION"

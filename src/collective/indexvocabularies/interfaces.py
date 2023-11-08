@@ -4,12 +4,17 @@
 from plone.app.z3cform.interfaces import IAjaxSelectWidget
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+from zope.schema.interfaces import IVocabularyFactory
 
 import zope.schema
 
 
 class ICollectiveIndexvocabulariesLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
+
+
+class IIndexVocabulary(IVocabularyFactory):
+    """ Interface for storing dynamic vocabularies """
 
 
 class ITagSelectWidget(IAjaxSelectWidget):

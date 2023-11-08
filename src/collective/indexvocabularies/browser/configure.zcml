@@ -24,7 +24,8 @@
     name="indexvocabularies-controlpanel" />
 
    <subscriber
-        for="plone.registry.interfaces.IRecordModifiedEvent"
+        for="collective.indexvocabularies.browser.controlpanel.IIndexVocabulariesControlPanel
+             plone.registry.interfaces.IRecordModifiedEvent"
         handler=".controlpanel.record_save"
         />
 

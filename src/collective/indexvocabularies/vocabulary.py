@@ -37,6 +37,10 @@ def KeywordIndexesVocabularyFactory(context):
 def index_vocabularies_factory(context):
     return
 
+
+def IndexVocabulary(name):
+    return IndexVocabularies(name).__call__
+
 class IndexVocabularies():
 
     def __init__(self, name):
