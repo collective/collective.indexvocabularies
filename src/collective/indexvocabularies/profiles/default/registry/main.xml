@@ -3,6 +3,8 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="collective.indexvocabularies">
 
-<!-- -*- extra stuff goes here -*- -->
+    <!-- -*- extra stuff goes here -*- -->
+    <records interface="collective.indexvocabularies.browser.controlpanel.IIndexVocabulariesControlPanel"
+         prefix="indexvocabularies" />
 
 </registry>
