@@ -1,13 +1,12 @@
 from plone import api
 from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
-from plone.restapi.services import Service
-from Products.CMFCore.utils import getToolByName
 from Products.PluginIndexes.FieldIndex.FieldIndex import FieldIndex
 from Products.PluginIndexes.KeywordIndex.KeywordIndex import KeywordIndex
 from zope.interface import provider
-from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+from plone.base.utils import safe_text
 
 
 def _get_keyword_indexes():
@@ -22,7 +21,6 @@ def _get_keyword_indexes():
     return results
 
 def _get_index_values(index):
-    results = []
     pc = api.portal.get_tool('portal_catalog')
     index = pc.Indexes[index]
     return [i for i in index.uniqueValues()]
@@ -37,9 +35,9 @@ def KeywordIndexesVocabularyFactory(context):
 def index_vocabularies_factory(context):
     return
 
-
 def IndexVocabulary(name):
     return IndexVocabularies(name).__call__
+
 
 class IndexVocabularies():
 
@@ -48,7 +46,10 @@ class IndexVocabularies():
 
     def __call__(self, context):
         values = _get_index_values(self.name)
-        vocab = safe_simplevocabulary_from_values(values)
-        return vocab
+        items = [
+            SimpleTerm(value, safe_text(value), safe_text(value))
+            for value in values
+        ]
+        return SimpleVocabulary(items)
 
 

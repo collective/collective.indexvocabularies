@@ -4,6 +4,7 @@ from collective.indexvocabularies.interfaces import IIndexVocabulary
 from collective.indexvocabularies.utils import _create_index_vocabulary
 from collective.indexvocabularies.utils import _remove_index_vocabulary
 from collective.indexvocabularies.utils import _sync_index_vocabularies
+from collective.indexvocabularies.utils import _sync_querystring_registry
 from collective.indexvocabularies.vocabulary import IndexVocabulary
 from plone.restapi.controlpanels import RegistryConfigletPanel
 from zope import schema
@@ -65,12 +66,5 @@ class IndexVocabulariesControlPanel(RegistryConfigletPanel):
 def record_save(records, entry):
     """ Event listener on plone.registry.interfaces.IRecordModifiedEvent """
 
-    # TODO: Only trigger when collective.indexvocabularies is modified
-    new_vals = [i for i in entry.newValue if i not in entry.oldValue]
-    del_vals = [i for i in entry.oldValue if i not in entry.newValue]
-    for index in new_vals:
-        _create_index_vocabulary(index)
-    for index in del_vals:
-        _remove_index_vocabulary(index)
-
     _sync_index_vocabularies()
+    _sync_querystring_registry()
