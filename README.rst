@@ -33,9 +33,11 @@ collective.indexvocabularies
 
 A Plone addon for creating dynamic vocabularies from catalog indexes.
 
-This package creates dynamic vocabularies based on any index in plone.
+This package allows an admin to create dynamic named vocabularies from data within the plone site.
+Vocabularies can then be used in metadata fields of your content types or in facets on a search block in volto.
 
-Typical use case for this is to provide a 'tags' type field.
+Currently supported is making vocabularies from existing unique values of a metadata field. This is useful to create
+a custom Tags field which is addable by editors, similar to the built in Subjects field.
 
 Installation
 ------------
@@ -60,12 +62,27 @@ Activate the add-on by installing it in the Addons Control panel.
 Configure
 ---------
 
-To create a vocabulary from an index, go to the 'Index Vocabularies' control
-panel and select the indexes you wish to create vocabularies for.
 
-To use the vocabulary in a tag field, you will need to edit the XML Schema of
-your content type. Currently this is only possible via the Classic UI
-(Control Panel -> Content Types -> Schema -> Edit XML Schema)
+To create a custom tag field on a content type you will need to do the following
+
+1. Create a new field of type "Multiselect"
+2. Save the content type. This will create an index for this field.
+3. Go to Dynamic Vocabularies in the control panel
+4. Select the Index matching the field you just created and click "Make Vocabulary".
+5. Copy the name of the vocabulary generated.
+8. Edit your content type again but this time via the editing it's XML
+   - Currently this is only possible via the Classic UI (Control Panel -> Content Types -> Schema -> Edit XML Schema)
+9. Change the widget to a TagSelectWidget with the vocabulrary name that was generated.  
+
+ e.g. 
+    <field name="test" type="zope.schema.Set">
+      <title>test</title>
+      <value_type type="zope.schema.TextLine" />
+      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+          <vocabulary>collective.dynamicvocabularies.uniquevalues.test</vocabulary>
+      </form:widget>
+    </field>
+  
 
 A basic schema (without tag fields):
 
