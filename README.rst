@@ -63,82 +63,80 @@ Configure
 ---------
 
 
-To create a custom tag field on a content type you will need to do the following
+To add a custom tag field to your content type you will need to do the following:
 
-- Create a new field of type "Multiselect"
-- Save the content type. This will create an index for this field.
-- Go to Dynamic Vocabularies in the control panel
-- Select the Index matching the field you just created and click "Make Vocabulary".
-- Copy the name of the vocabulary generated.
-- Edit your content type again but this time via the editing it's XML
-  - Currently this is only possible via the Classic UI (Control Panel -> Content Types -> Schema -> Edit XML Schema)
-- Change the widget to a TagSelectWidget with the vocabulary name that was generated.
+- Go to the Content Types control panel
+   - Create a new field of type "Multiselect"
+   - Save the content type. This will create an index for this field.
+- Go to the Dynamic Vocabularies control panel
+   - Select the index dropdown and select the field you just created
+   - Save the settings. This creates a vocabulary that is accessed via `collective.indexvocabularies.{your_field_name}`
+- Go to the Content Types control panel
+   - Currently this is only possible via the Classic UI
+   - Go to Content Types -> Schema and select "Edit XML Schema"
+   - Change the widget to a TagSelectWidget with the vocabulary name that was generated (instructions below).
 
+Example Fieldset (where the new field name is `test`)::
 
-For example:
-
-```xml
-  <field name="test" type="zope.schema.Set">
-    <title>test</title>
-    <value_type type="zope.schema.TextLine" />
-    <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
-        <vocabulary>collective.dynamicvocabularies.uniquevalues.test</vocabulary>
-    </form:widget>
-  </field>
-```
-
-
-A basic schema (without tag fields):
-
-```xml
-  <model xmlns="http://namespaces.plone.org/supermodel/schema">
-    <schema>
-      <field name="test" type="zope.schema.Set">
-        <title>test</title>
-        <value_type type="zope.schema.TextLine" />
-      </field>
-    </schema>
-  </model>
-```
-
-In order to make the field a 'tag' field, you will add the following widget
-directive:
-
-```xml
-      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
-          <vocabulary>collective.indexvocabularies.category</vocabulary>
-      </form:widget>
-```
-
-The combined schema code would look like this:
-
-```xml
   <model xmlns="http://namespaces.plone.org/supermodel/schema">
     <schema>
       <field name="test" type="zope.schema.Set">
         <title>test</title>
         <value_type type="zope.schema.TextLine" />
         <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
-            <vocabulary>collective.indexvocabularies.category</vocabulary>
+            <vocabulary>collective.indexvocabularies.test</vocabulary>
         </form:widget>
       </field>
     </schema>
   </model>
-```
+
+
+Updating the XML Fieldset
+=========================
+
+A basic schema (without tag fields) looks like this::
+
+  <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    <schema>
+      <field name="test" type="zope.schema.Set">
+        <title>test</title>
+        <value_type type="zope.schema.TextLine" />
+      </field>
+    </schema>
+  </model>
+
+In order to make the field a 'tag' field, you will add the following widget
+directive::
+
+      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+          <vocabulary>collective.indexvocabularies.test</vocabulary>
+      </form:widget>
+
+
+
+The combined schema code would then be::
+
+  <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    <schema>
+      <field name="test" type="zope.schema.Set">
+        <title>test</title>
+        <value_type type="zope.schema.TextLine" />
+        <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+            <vocabulary>collective.indexvocabularies.test</vocabulary>
+        </form:widget>
+      </field>
+    </schema>
+  </model>
+
 
 You should now have a tags field configured on your content type.
 
-Note that the tag field should be configured to use the same index that is
-being read from. For example, you could create an index called 'categories',
-which is mapped to the `Object.categories` field, then enable it in the
-index vocabularies control panel. Once you have updated the schema to use the
-new vocabulary you will have tags field that you can add values to.
 
 Authors
 -------
 
 Jon Pentland, PretaGov Ltd - [instification]
-
+Dylan Jay, PretaGov Ltd - [djay]
 
 Contribute
 ----------
