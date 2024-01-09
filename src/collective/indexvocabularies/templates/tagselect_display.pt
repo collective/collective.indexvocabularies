@@ -2,7 +2,6 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       tal:omit-tag=""
 >
-<p>oh hai!</p>
   <span id="${view/id}"
         tal:attributes="
           view/attributes;
