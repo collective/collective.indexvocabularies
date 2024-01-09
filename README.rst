@@ -65,16 +65,16 @@ Configure
 
 To add a custom tag field to your content type you will need to do the following:
 
-- Go to the Content Types control panel
-   - Create a new field of type "Multiselect"
+- Go to the Content Types control panel.
+   - Create a new field of type ``Multiselect``.
    - Save the content type. This will create an index for this field.
-- Go to the Dynamic Vocabularies control panel
-   - Select the index dropdown and select the field you just created
-   - Save the settings. This creates a vocabulary that is accessed via ``collective.indexvocabularies.{your_field_name}``
-- Go to the Content Types control panel
-   - Currently this is only possible via the Classic UI
+- Go to the Dynamic Vocabularies control panel.
+   - Select the index dropdown and select the field you just created.
+   - Save the settings. This creates a vocabulary that is accessed via ``collective.indexvocabularies.{your_field_name}``.
+- Go to the Content Types control panel.
+   - **Note**: *Currently this is only possible via the Classic UI.*
    - Go to Content Types -> Schema and select "Edit XML Schema"
-   - Change the widget to a TagSelectWidget with the vocabulary name that was generated (instructions below).
+   - Change the widget to a ``TagSelectWidget`` with the vocabulary name that was generated (instructions below).
 
 Example Fieldset (where the new field name is ``test``)::
 
@@ -108,9 +108,9 @@ A basic schema (without tag fields) looks like this::
 In order to make the field a 'tag' field, you will add the following widget
 directive::
 
-      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
-          <vocabulary>collective.indexvocabularies.test</vocabulary>
-      </form:widget>
+  <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+      <vocabulary>collective.indexvocabularies.test</vocabulary>
+  </form:widget>
 
 
 
