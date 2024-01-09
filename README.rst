@@ -33,11 +33,11 @@ collective.indexvocabularies
 
 A Plone addon for creating dynamic vocabularies from catalog indexes.
 
-This package allows an admin to create dynamic named vocabularies from data within the plone site.
-Vocabularies can then be used in metadata fields of your content types or in facets on a search block in volto.
+This package allows an admin to create dynamically named vocabularies from data within the Plone site.
+Vocabularies can then be used in metadata fields of your content types or in facets on a search block in Volto.
 
-Currently supported is making vocabularies from existing unique values of a metadata field. This is useful to create
-a custom Tags field which is addable by editors, similar to the built in Subjects field.
+Currently supported is making vocabularies from existing unique values of a metadata field.
+This is useful to create a custom ``Tags`` field which is addable by editors, similar to the built in ``Subjects`` field.
 
 Installation
 ------------
