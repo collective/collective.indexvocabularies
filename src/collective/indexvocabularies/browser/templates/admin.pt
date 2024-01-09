@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="ploneconf.site">
+<body>
+    <metal:content-core fill-slot="content-core">
+      <p>Index Vocabularies</p>
+      <tal:block tal:repeat="vocab view/vocabs">
+        <p><a tal:attributes="href python:f'?vocab={vocab}'" tal:content="vocab" />
+        </p>
+      </tal:block>
+
+      <tal:block tal:condition="view/vocabulary_values">
+        <ul tal:repeat="value view/vocabulary_values">
+          <li tal:content="value" />
+        </ul>
+      </tal:block>
+
+    </metal:content-core>
+</body>
+</html>

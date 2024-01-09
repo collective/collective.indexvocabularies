@@ -29,4 +29,12 @@
         handler=".controlpanel.record_save"
         />
 
+     <browser:page
+       name="@indexvocabularies-admin"
+       for="*"
+       class=".admin.AdminView"
+       template="templates/admin.pt"
+       permission="zope2.View"
+       />
+
 </configure>
