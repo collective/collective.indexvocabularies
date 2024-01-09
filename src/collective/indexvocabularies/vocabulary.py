@@ -1,12 +1,12 @@
 from plone import api
 from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
+from plone.base.utils import safe_text
 from Products.PluginIndexes.FieldIndex.FieldIndex import FieldIndex
 from Products.PluginIndexes.KeywordIndex.KeywordIndex import KeywordIndex
 from zope.interface import provider
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from plone.base.utils import safe_text
 
 
 def _get_keyword_indexes():
