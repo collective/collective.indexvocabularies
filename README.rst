@@ -65,61 +65,65 @@ Configure
 
 To create a custom tag field on a content type you will need to do the following
 
-1. Create a new field of type "Multiselect"
-2. Save the content type. This will create an index for this field.
-3. Go to Dynamic Vocabularies in the control panel
-4. Select the Index matching the field you just created and click "Make Vocabulary".
-5. Copy the name of the vocabulary generated.
-8. Edit your content type again but this time via the editing it's XML
-   - Currently this is only possible via the Classic UI (Control Panel -> Content Types -> Schema -> Edit XML Schema)
-9. Change the widget to a TagSelectWidget with the vocabulrary name that was generated.  
+- Create a new field of type "Multiselect"
+- Save the content type. This will create an index for this field.
+- Go to Dynamic Vocabularies in the control panel
+- Select the Index matching the field you just created and click "Make Vocabulary".
+- Copy the name of the vocabulary generated.
+- Edit your content type again but this time via the editing it's XML
+  - Currently this is only possible via the Classic UI (Control Panel -> Content Types -> Schema -> Edit XML Schema)
+- Change the widget to a TagSelectWidget with the vocabulary name that was generated.
 
- e.g. 
-    <field name="test" type="zope.schema.Set">
-      <title>test</title>
-      <value_type type="zope.schema.TextLine" />
-      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
-          <vocabulary>collective.dynamicvocabularies.uniquevalues.test</vocabulary>
-      </form:widget>
-    </field>
-  
+
+For example:
+
+```xml
+  <field name="test" type="zope.schema.Set">
+    <title>test</title>
+    <value_type type="zope.schema.TextLine" />
+    <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+        <vocabulary>collective.dynamicvocabularies.uniquevalues.test</vocabulary>
+    </form:widget>
+  </field>
+```
+
 
 A basic schema (without tag fields):
 
-```
-<model xmlns="http://namespaces.plone.org/supermodel/schema">
-  <schema>
-    <field name="test" type="zope.schema.Set">
-      <title>test</title>
-      <value_type type="zope.schema.TextLine" />
-    </field>
-  </schema>
-</model>
+```xml
+  <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    <schema>
+      <field name="test" type="zope.schema.Set">
+        <title>test</title>
+        <value_type type="zope.schema.TextLine" />
+      </field>
+    </schema>
+  </model>
 ```
 
 In order to make the field a 'tag' field, you will add the following widget
 directive:
 
-```
-    <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
-        <vocabulary>collective.indexvocabularies.category</vocabulary>
-    </form:widget>
+```xml
+      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+          <vocabulary>collective.indexvocabularies.category</vocabulary>
+      </form:widget>
 ```
 
 The combined schema code would look like this:
 
-```
-<model xmlns="http://namespaces.plone.org/supermodel/schema">
-  <schema>
-    <field name="test" type="zope.schema.Set">
-      <title>test</title>
-      <value_type type="zope.schema.TextLine" />
-      <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
-          <vocabulary>collective.indexvocabularies.category</vocabulary>
-      </form:widget>
-    </field>
-  </schema>
-</model>
+```xml
+  <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    <schema>
+      <field name="test" type="zope.schema.Set">
+        <title>test</title>
+        <value_type type="zope.schema.TextLine" />
+        <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
+            <vocabulary>collective.indexvocabularies.category</vocabulary>
+        </form:widget>
+      </field>
+    </schema>
+  </model>
 ```
 
 You should now have a tags field configured on your content type.
