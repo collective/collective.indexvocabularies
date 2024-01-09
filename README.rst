@@ -70,13 +70,13 @@ To add a custom tag field to your content type you will need to do the following
    - Save the content type. This will create an index for this field.
 - Go to the Dynamic Vocabularies control panel
    - Select the index dropdown and select the field you just created
-   - Save the settings. This creates a vocabulary that is accessed via `collective.indexvocabularies.{your_field_name}`
+   - Save the settings. This creates a vocabulary that is accessed via ``collective.indexvocabularies.{your_field_name}``
 - Go to the Content Types control panel
    - Currently this is only possible via the Classic UI
    - Go to Content Types -> Schema and select "Edit XML Schema"
    - Change the widget to a TagSelectWidget with the vocabulary name that was generated (instructions below).
 
-Example Fieldset (where the new field name is `test`)::
+Example Fieldset (where the new field name is ``test``)::
 
   <model xmlns="http://namespaces.plone.org/supermodel/schema">
     <schema>
