@@ -20,6 +20,7 @@ def _create_index_vocabulary(index):
     lsm = getSiteManager(portal)
     lsm.registerUtility(IndexVocabulary(index), IVocabularyFactory, name=f'collective.indexvocabularies.{index}')
 
+
 def _remove_index_vocabulary(index):
     """ Removes a vocabulary """
     portal = api.portal.get()
@@ -32,6 +33,7 @@ def _remove_index_vocabulary(index):
     result = lsm.unregisterUtility(util, IVocabularyFactory, name=f'collective.indexvocabularies.{index}')
     if result:
         log.warn(f'Could not remove vocabulary: collective.indexvocabularies.{index}')
+
 
 def _sync_index_vocabularies():
     """ Function to ensure that the local vocabularies match what is in the registry"""
@@ -53,11 +55,11 @@ def _sync_index_vocabularies():
         log.warn(f'Vocabulary: collective.indexvocabularies.{vocab} is not registered. Registering')
         _create_index_vocabulary(vocab)
 
+
 def _list_index_vocabularies():
     """ Function to ensure that the local vocabularies match what is in the registry"""
     portal = api.portal.get()
     lsm = getSiteManager(portal)
-    registry_values = api.portal.get_registry_record('indexvocabularies.indexes', default=set())
     vocabs = [i[0].split('.')[-1] for i in
               lsm.getUtilitiesFor(IVocabularyFactory)
               if i[0].startswith('collective.indexvocabularies.')
@@ -79,6 +81,7 @@ def _create_querystring_registry(index):
     registry.records[f'{PREFIX}.{index}.vocabulary'] = Record(field.TextLine(title="Vocabulary"), f'collective.indexvocabularies.{index}')
     registry.records[f'{PREFIX}.{index}.indexvocabularies'] = Record(field.Bool(title="IndexVocabularies", description="Created by collective.indexvocabularies"), True)
 
+
 def _remove_querystring_registry(index):
     """ Removes the querystring registry entries for the given index"""
     registry = api.portal.get_tool('portal_registry')
@@ -92,6 +95,7 @@ def _remove_querystring_registry(index):
               'vocabulary',
               'indexvocabularies']:
         del registry.records[f'{PREFIX}.{index}.{x}']
+
 
 def _sync_querystring_registry():
     """ Function to ensure that the querystring registry entries are in sync"""

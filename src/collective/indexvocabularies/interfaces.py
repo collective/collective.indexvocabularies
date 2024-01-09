@@ -2,7 +2,6 @@
 """Module where all interfaces, events and exceptions live."""
 
 from plone.app.z3cform.interfaces import IAjaxSelectWidget
-from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from zope.schema.interfaces import IVocabularyFactory
 

@@ -20,10 +20,12 @@ def _get_keyword_indexes():
         results.append(index.id)
     return results
 
+
 def _get_index_values(index):
     pc = api.portal.get_tool('portal_catalog')
     index = pc.Indexes[index]
     return [i for i in index.uniqueValues()]
+
 
 @provider(IVocabularyFactory)
 def KeywordIndexesVocabularyFactory(context):
@@ -34,6 +36,7 @@ def KeywordIndexesVocabularyFactory(context):
 @provider(IVocabularyFactory)
 def index_vocabularies_factory(context):
     return
+
 
 def IndexVocabulary(name):
     return IndexVocabularies(name).__call__
@@ -51,5 +54,3 @@ class IndexVocabularies():
             for value in values
         ]
         return SimpleVocabulary(items)
-
-
