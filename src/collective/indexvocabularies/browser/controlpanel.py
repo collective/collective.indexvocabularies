@@ -25,27 +25,28 @@ import logging
 # from zope import event
 
 
-log = logging.getLogger('collective.indexvocabularies')
+log = logging.getLogger("collective.indexvocabularies")
 
 _ = MessageFactory("collective.indexvocabularies")
 
 
 class IIndexVocabulariesControlPanel(Interface):
-    """ Control panel schema for the index vocabulary package"""
+    """Control panel schema for the index vocabulary package"""
 
     indexes = schema.Set(
         title="Indexes to create vocabularies from",
         required=False,
         value_type=schema.Choice(
-            vocabulary='collective.indexvocabularies.KeywordIndexes'
+            vocabulary="collective.indexvocabularies.KeywordIndexes"
         ),
-        default=set()
+        default=set(),
     )
 
 
 @adapter(Interface, Interface)
 class IndexVocabulariesControlPanel(RegistryConfigletPanel):
-    """ Control panel class for the index vocabulary package"""
+    """Control panel class for the index vocabulary package"""
+
     schema = IIndexVocabulariesControlPanel
     schema_prefix = "indexvocabularies"
     configlet_id = "indexvocabularies-controlpanel"
@@ -55,7 +56,7 @@ class IndexVocabulariesControlPanel(RegistryConfigletPanel):
 
 
 def record_save(records, entry):
-    """ Event listener on plone.registry.interfaces.IRecordModifiedEvent """
+    """Event listener on plone.registry.interfaces.IRecordModifiedEvent"""
 
     _sync_index_vocabularies()
     _sync_querystring_registry()

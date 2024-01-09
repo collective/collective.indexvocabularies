@@ -27,8 +27,11 @@ def uninstall(context):
     """Uninstall script"""
 
     # Remove any registry entries
-    if api.portal.get_registry_record('indexvocabularies.indexes', default=None) is not None:
-        api.portal.set_registry_record('indexvocabularies.indexes', set([]))
+    if (
+        api.portal.get_registry_record("indexvocabularies.indexes", default=None)
+        is not None
+    ):
+        api.portal.set_registry_record("indexvocabularies.indexes", set([]))
 
     # Remove any vocabulary utilities
     _sync_index_vocabularies()

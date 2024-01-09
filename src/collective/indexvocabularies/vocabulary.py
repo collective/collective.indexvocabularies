@@ -11,7 +11,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 def _get_keyword_indexes():
     results = []
-    pc = api.portal.get_tool('portal_catalog')
+    pc = api.portal.get_tool("portal_catalog")
     indexes = [i for i in pc.indexes()]
     for index in indexes:
         index = pc.Indexes[index]
@@ -22,7 +22,7 @@ def _get_keyword_indexes():
 
 
 def _get_index_values(index):
-    pc = api.portal.get_tool('portal_catalog')
+    pc = api.portal.get_tool("portal_catalog")
     index = pc.Indexes[index]
     return [i for i in index.uniqueValues()]
 
@@ -42,15 +42,13 @@ def IndexVocabulary(name):
     return IndexVocabularies(name).__call__
 
 
-class IndexVocabularies():
-
+class IndexVocabularies:
     def __init__(self, name):
         self.name = name
 
     def __call__(self, context):
         values = _get_index_values(self.name)
         items = [
-            SimpleTerm(value, safe_text(value), safe_text(value))
-            for value in values
+            SimpleTerm(value, safe_text(value), safe_text(value)) for value in values
         ]
         return SimpleVocabulary(items)

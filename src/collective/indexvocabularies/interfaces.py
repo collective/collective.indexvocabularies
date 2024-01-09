@@ -13,38 +13,22 @@ class ICollectiveIndexvocabulariesLayer(IDefaultBrowserLayer):
 
 
 class IIndexVocabulary(IVocabularyFactory):
-    """ Interface for storing dynamic vocabularies """
+    """Interface for storing dynamic vocabularies"""
 
 
 class ITagSelectWidget(IAjaxSelectWidget):
     """Marker interface for the ITagSelectWidget."""
 
-    pattern = zope.schema.TextLine(
-        title='Pattern',
-        default="select2"
-    )
+    pattern = zope.schema.TextLine(title="Pattern", default="select2")
 
-    pattern_options = zope.schema.Text(
-        title='Pattern Options',
-        default=''
-    )
+    pattern_options = zope.schema.Text(title="Pattern Options", default="")
 
-    separator = zope.schema.TextLine(
-        title='Separator',
-        default=";"
-    )
+    separator = zope.schema.TextLine(title="Separator", default=";")
 
-    vocabulary = zope.schema.TextLine(
-        title='Vocabulary',
-        default=None
-    )
+    vocabulary = zope.schema.TextLine(title="Vocabulary", default=None)
 
     vocabulary_view = zope.schema.TextLine(
-        title='Vocabulary View',
-        default="@@getVocabulary"
+        title="Vocabulary View", default="@@getVocabulary"
     )
 
-    orderable = zope.schema.Bool(
-        title='Orderable',
-        default=False
-    )
+    orderable = zope.schema.Bool(title="Orderable", default=False)
