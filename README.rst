@@ -135,8 +135,8 @@ You should now have a tags field configured on your content type.
 Authors
 -------
 
-Jon Pentland, PretaGov Ltd - [instification]
-Dylan Jay, PretaGov Ltd - [djay]
+- Jon Pentland, PretaGov Ltd - [instification]
+- Dylan Jay, PretaGov Ltd - [djay]
 
 Contribute
 ----------
