@@ -33,11 +33,18 @@ collective.indexvocabularies
 
 A Plone addon for creating dynamic vocabularies from catalog indexes.
 
-This package allows an admin to create dynamically named vocabularies from data within the Plone site.
-Vocabularies can then be used in metadata fields of your content types or in facets on a search block in Volto.
+This package allows an admin to create dynamically named vocabularies from Plone
+indexes.
 
-Currently supported is making vocabularies from existing unique values of a metadata field.
-This is useful to create a custom ``Tags`` field which is addable by editors, similar to the built in ``Subjects`` field.
+The dynamic vocabularies can then be used in metadata fields of your content
+types or in facets on a search block in Volto.
+
+Currently supported is making vocabularies from existing unique values of a
+metadata field.
+
+This is useful to create a custom ``Tags`` field which is addable by editors,
+similar to the built in ``Subjects`` field.
+
 
 Installation
 ------------
@@ -66,11 +73,15 @@ Configure
 To add a custom tag field to your content type you will need to do the following:
 
 - Go to the Content Types control panel.
-   - Create a new field of type ``Multiselect``.
-   - Save the content type. This will create an index for this field.
-- Go to the Dynamic Vocabularies control panel.
+   - Create a new field of type ``Multiple Choice``.
+   - Save the content type.
+- Go to ``portal_catalog`` in the ZMI
+   - Create a new ``KeywordIndex`` with the same name as the field you created
+     in the previous step.
+- Go to the Index Vocabularies control panel.
    - Select the index dropdown and select the field you just created.
-   - Save the settings. This creates a vocabulary that is accessed via ``collective.indexvocabularies.{your_field_name}``.
+   - Save the settings. This creates a vocabulary that is accessed via
+     ``collective.indexvocabularies.{your_field_name}``.
 - Go to the Content Types control panel.
    - **Note**: *Currently this is only possible via the Classic UI.*
    - Go to Content Types -> Schema and select "Edit XML Schema"
@@ -130,6 +141,32 @@ The combined schema code would then be::
 
 
 You should now have a tags field configured on your content type.
+
+
+
+
+Uninstalling
+------------
+
+When you uninstall the add-on it will remove any persistent utilities and
+querystring registrations.
+
+However you will need to update any content type
+fieldset schemas that make use of the vocabularies this add-on has created:
+
+  - Remove any ``<form:widget>`` entries that use
+     ``collective.indexvocabularies.widgets.TagSelectWidget``
+
+
+How does this addon work?
+-------------------------
+
+For each vocabulary that is created in the admin the following happens:
+
+ - A persistent ``IVocabularyFactory`` is registered with the name
+   ``collective.indexvocabularies.{index_name}``
+ - A series of registry entries are created that register the widget as a
+   facet and filter for ``plone.app.querystring`
 
 
 Authors
