@@ -20,7 +20,7 @@ def _create_index_vocabulary(index):
     lsm = getSiteManager(portal)
     lsm.registerUtility(
         IndexVocabulary(index),
-        IVocabularyFactory,
+        provided=IVocabularyFactory,
         name=f"collective.indexvocabularies.{index}",
     )
 
@@ -39,7 +39,7 @@ def _remove_index_vocabulary(index):
         )
         return
     result = lsm.unregisterUtility(
-        util, IVocabularyFactory, name=f"collective.indexvocabularies.{index}"
+        IndexVocabulary(index), provided=IVocabularyFactory, name=f"collective.indexvocabularies.{index}"
     )
     if result:
         log.warn(f"Could not remove vocabulary: collective.indexvocabularies.{index}")
