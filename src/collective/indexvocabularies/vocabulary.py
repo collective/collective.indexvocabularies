@@ -39,7 +39,7 @@ def index_vocabularies_factory(context):
 
 
 def IndexVocabulary(name):
-    return IndexVocabularies(name).__call__
+    return IndexVocabularies(name)
 
 def getIndexVocabulary(name):
     return IndexVocabularies(name)
@@ -49,7 +49,10 @@ class IndexVocabularies:
     def __init__(self, name):
         self.name = name
 
-    def __call__(self, context=None):
+    def __call__(self):
+        return self.index_values
+
+    def index_values(self, context=None):
         values = _get_index_values(self.name)
         items = [
             SimpleTerm(value, safe_text(value), safe_text(value)) for value in values
