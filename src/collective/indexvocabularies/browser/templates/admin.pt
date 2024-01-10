@@ -16,6 +16,11 @@
         </ul>
       </tal:block>
 
+
+      <h2>Persistent Utilities</h2>
+      <ul tal:repeat="utility view/putils">
+        <li tal:content="utility" />
+      </ul>
     </metal:content-core>
 </body>
 </html>

@@ -34,7 +34,103 @@
        for="*"
        class=".admin.AdminView"
        template="templates/admin.pt"
-       permission="zope2.View"
+       permission="cmf.ManagePortal"
        />
+
+      <!-- taken from wildcard.fixpersistentutilities -->
+        <browser:page
+     name="fix-persistent-utilities"
+     for="OFS.interfaces.IApplication"
+     class=".fixutils.FixPersistentUtilities"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="delete-persistent-utility"
+     for="OFS.interfaces.IApplication"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="delete_utility"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="delete-persistent-utility-reg"
+     for="OFS.interfaces.IApplication"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="delete_utility_reg"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="activate-expert-mode-for-fixing-persistent-utilities"
+     for="OFS.interfaces.IApplication"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="activate_expert_mode"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="deactivate-expert-mode-for-fixing-persistent-utilities"
+     for="OFS.interfaces.IApplication"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="deactivate_expert_mode"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="fix-persistent-utilities"
+     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+     class=".fixutils.FixPersistentUtilities"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="delete-persistent-utility"
+     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="delete_utility"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="delete-persistent-utility-reg"
+     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="delete_utility_reg"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="activate-expert-mode-for-fixing-persistent-utilities"
+     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="activate_expert_mode"
+     permission="cmf.ManagePortal"
+     />
+
+  <browser:page
+     name="deactivate-expert-mode-for-fixing-persistent-utilities"
+     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+     class=".fixutils.FixPersistentUtilities"
+     attribute="deactivate_expert_mode"
+     permission="cmf.ManagePortal"
+     />
+
+
+  <browser:page
+     name="fix-interfaces-fpu"
+     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+     class=".fixutils.RemoveInterfaces"
+     permission="cmf.ManagePortal"
+     template="templates/fix-interfaces.pt"
+     />
+  <browser:page
+     name="fix-interfaces-fpu"
+     for="OFS.interfaces.IApplication"
+     class=".fixutils.RemoveInterfaces"
+     permission="cmf.ManagePortal"
+     template="templates/fix-interfaces.pt"
+     />
+
 
 </configure>
