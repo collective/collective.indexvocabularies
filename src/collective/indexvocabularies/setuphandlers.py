@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.indexvocabularies.utils import _sync_index_vocabularies
+from collective.indexvocabularies.utils import _sync_querystring_registry
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
@@ -35,3 +36,6 @@ def uninstall(context):
 
     # Remove any vocabulary utilities
     _sync_index_vocabularies()
+
+    # Remove any querystring entries
+    _sync_querystring_registry()
