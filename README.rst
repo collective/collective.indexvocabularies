@@ -91,7 +91,7 @@ Example Fieldset (where the new field name is ``test``)::
 
   <model xmlns="http://namespaces.plone.org/supermodel/schema">
     <schema>
-      <field name="test" type="zope.schema.Set">
+      <field name="test" type="zope.schema.Tuple">
         <title>test</title>
         <value_type type="zope.schema.TextLine" />
         <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
@@ -109,7 +109,7 @@ A basic schema (without tag fields) looks like this::
 
   <model xmlns="http://namespaces.plone.org/supermodel/schema">
     <schema>
-      <field name="test" type="zope.schema.Set">
+      <field name="test" type="zope.schema.Choice">
         <title>test</title>
         <value_type type="zope.schema.TextLine" />
       </field>
@@ -129,7 +129,7 @@ The combined schema code would then be::
 
   <model xmlns="http://namespaces.plone.org/supermodel/schema">
     <schema>
-      <field name="test" type="zope.schema.Set">
+      <field name="test" type="zope.schema.Tuple">
         <title>test</title>
         <value_type type="zope.schema.TextLine" />
         <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
