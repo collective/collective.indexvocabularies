@@ -116,13 +116,16 @@ A basic schema (without tag fields) looks like this::
     </schema>
   </model>
 
-In order to make the field a 'tag' field, you will add the following widget
-directive::
+In order to make the field a 'tag' field, you will need to change the type to
+a Tuple::
+
+  <field name="test" type="zope.schema.Tuple">
+
+and then add the following widget directive::
 
   <form:widget type="collective.indexvocabularies.widgets.TagSelectWidget">
       <vocabulary>collective.indexvocabularies.test</vocabulary>
   </form:widget>
-
 
 
 The combined schema code would then be::
@@ -141,8 +144,6 @@ The combined schema code would then be::
 
 
 You should now have a tags field configured on your content type.
-
-
 
 
 Uninstalling
@@ -166,7 +167,23 @@ For each vocabulary that is created in the admin the following happens:
  - A persistent ``IVocabularyFactory`` is registered with the name
    ``collective.indexvocabularies.{index_name}``
  - A series of registry entries are created that register the widget as a
-   facet and filter for ``plone.app.querystring`
+   facet and filter for ``plone.app.querystring``
+
+
+The addon also subclasses the `default IAjaxSelect tag widget <https://github.com/plone/plone.app.z3cform/blob/master/plone/app/z3cform/interfaces.py#L82>`_
+- from `plone.app.z3cform <https://github.com/plone/plone.app.z3cform>`_ in
+order to provide supermodel import/export support. This could easily be added to
+``plone.app.z3cform`` which would remove the need for an additional widget.
+
+
+Alternatives
+------------
+
+Depending on your specific usecase you might be able to try the following:
+
+ - Create custom behaviors in your own addon
+ - Use the `plone.app.vocabularies.Catalog` vocabualary. See `this discussion <https://community.plone.org/t/widget-parameter-for-catalogsource-based-choicefield/18129/3>`_
+ - Use `collective.taxonomy <https://github.com/collective/collective.taxonomy>`_
 
 
 Authors
