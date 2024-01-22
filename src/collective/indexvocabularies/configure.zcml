@@ -3,6 +3,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
     i18n_domain="collective.indexvocabularies">
 
   <i18n:registerTranslations directory="locales" />
@@ -20,9 +21,9 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="collective.indexvocabularies"
+      title="Index Vocabularies"
       directory="profiles/default"
-      description="Installs the collective.indexvocabularies add-on."
+      description="Adds support for index based vocabularies."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       post_handler=".setuphandlers.post_install"
       />
@@ -41,6 +42,32 @@
       name="collective.indexvocabularies-hiddenprofiles"
       />
 
-  <!-- -*- extra stuff goes here -*- -->
+  <!-- Vocabulary to list Keyword indexes -->
+  <utility
+    name="collective.indexvocabularies.KeywordIndexes"
+    component="collective.indexvocabularies.vocabulary.KeywordIndexesVocabularyFactory" />
+
+
+  <!-- Subclass plone.app.z3form.widgets.select.AjaxSelectWidget.
+       Create collective.indexvocabularies.interfaces.ITagSelectWidget
+       This is needed so we can provide import/export support for supermodel.
+       TODO: this would be a non-breaking PR to implement the export/import
+          handler directly on plone.app.z3form.widgets.select.AjaxSelectWidget
+   -->
+    <z3c:widgetTemplate
+      field="*"
+      widget=".interfaces.ITagSelectWidget"
+      template="templates/tagselect_display.pt"
+      layer=".interfaces.ICollectiveIndexvocabulariesLayer"
+      mode="display"
+    />
+
+  <!-- Create export/import handler to work with supermodel -->
+   <utility
+      provides="plone.autoform.interfaces.IWidgetExportImportHandler"
+      name="collective.indexvocabularies.widgets.TagSelectWidget"
+      component=".widgets.TagSelectWidgetExportImportHandler"
+      />
+
 
 </configure>
