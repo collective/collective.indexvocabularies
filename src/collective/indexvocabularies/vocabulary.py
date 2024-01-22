@@ -15,7 +15,7 @@ def _get_keyword_indexes():
     indexes = [i for i in pc.indexes()]
     for index in indexes:
         index = pc.Indexes[index]
-        if index.__class__ != KeywordIndex and index.__class__ != FieldIndex:
+        if index.__class__ != KeywordIndex:
             continue
         results.append(index.id)
     return results
@@ -30,7 +30,10 @@ def _get_index_values(index):
 @provider(IVocabularyFactory)
 def KeywordIndexesVocabularyFactory(context):
     values = _get_keyword_indexes()
-    return safe_simplevocabulary_from_values(values)
+    items = [
+        SimpleTerm(value, safe_text(value), safe_text(value)) for value in values
+    ]
+    return SimpleVocabulary(items)
 
 
 @provider(IVocabularyFactory)
