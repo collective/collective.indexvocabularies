@@ -53,7 +53,7 @@
        This is needed so we can provide import/export support for supermodel.
        TODO: this would be a non-breaking PR to implement the export/import
           handler directly on plone.app.z3form.widgets.select.AjaxSelectWidget
-   -->
+
     <z3c:widgetTemplate
       field="*"
       widget=".interfaces.ITagSelectWidget"
@@ -61,7 +61,7 @@
       layer=".interfaces.ICollectiveIndexvocabulariesLayer"
       mode="display"
     />
-
+   -->
   <!-- Create export/import handler to work with supermodel -->
    <utility
       provides="plone.autoform.interfaces.IWidgetExportImportHandler"
