@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="collective.indexvocabularies",
-    version="1.0a1",
+    version="0.9.a1",
     description="A Plone addon for creating dynamic vocabularies from catalog indexes.",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/

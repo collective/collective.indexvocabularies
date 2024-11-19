@@ -18,4 +18,15 @@
       directory="static"
       />
 
+
+  <adapter
+    factory=".controlpanel.IndexVocabulariesControlPanel"
+    name="indexvocabularies-controlpanel" />
+
+   <subscriber
+        for="collective.indexvocabularies.browser.controlpanel.IIndexVocabulariesControlPanel
+             plone.registry.interfaces.IRecordModifiedEvent"
+        handler=".controlpanel.record_save"
+        />
+
 </configure>
