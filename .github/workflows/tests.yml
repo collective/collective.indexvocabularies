@@ -1,0 +1,31 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Plone ${{ matrix.plone-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        plone-version: ["6.1.5", "6.2.2"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Plone with Python
+        uses: plone/setup-plone@v2.0.0
+        with:
+          python-version: "3.12"
+          plone-version: ${{ matrix.plone-version }}
+
+      - name: Install package
+        run: pip install -e ".[test]"
+
+      - name: Run tests
+        # The robot tests need a browser; run the integration tests only.
+        run: python -m zope.testrunner --test-path=src -m collective.indexvocabularies -t '!robot'
